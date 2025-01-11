@@ -1,0 +1,9 @@
+repos:
+-   repo: local
+    hooks:
+    -   id: check-requirements
+        name: Check and Install Requirements
+        entry: python scripts/update_dependencies.py
+        language: python
+        files: requirements.txt
+        pass_filenames: false

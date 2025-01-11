@@ -1,0 +1,24 @@
+.blog-post {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 1.5em;
+    color: #666;
+    margin-bottom: 1.5em;
+}
+
+.body-text {
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+    color: #444;
+}

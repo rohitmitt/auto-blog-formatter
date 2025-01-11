@@ -1,0 +1,12 @@
+{
+    "line_length": 80,
+    "paragraph_spacing": 2,
+    "capitalize_headings": true,
+    "normalize_quotation_marks": true,
+    "analyzer": {
+        "enable_sentiment": true,
+        "enable_key_phrases": true,
+        "min_title_length": 10,
+        "max_title_length": 100
+    }
+}
