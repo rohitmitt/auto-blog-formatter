@@ -20,20 +20,29 @@ class TextAnalyzer:
             'metadata': {}
         }
         
-        # Simple heuristic: first non-empty line is usually the title
+        # More sophisticated title detection
         for line in lines:
-            if line.strip():
-                structure['title'] = line.strip()
-                break
+            line = line.strip()
+            if line:
+                # Title should be relatively short and not end with punctuation
+                if len(line.split()) <= 8 and not line[-1] in '.!?':
+                    structure['title'] = line
+                    break
+                else:
+                    # If first line doesn't look like a title, treat everything as body
+                    structure['body'].append(line)
+                    return structure
                 
-        # Look for potential subtitle (next non-empty line after title)
+        # Subtitle detection - should be longer than title but not a full paragraph
         subtitle_found = False
         for line in lines[1:]:
-            if line.strip():
-                structure['subtitle'] = line.strip()
-                subtitle_found = True
+            line = line.strip()
+            if line:
+                if len(line.split()) <= 15 and not any(sent.endswith('.') for sent in line.split('. ')):
+                    structure['subtitle'] = line
+                    subtitle_found = True
                 break
-                
+        
         # Process body paragraphs
         start_idx = 2 if subtitle_found else 1
         current_paragraph = []
@@ -65,4 +74,4 @@ class TextAnalyzer:
     
     def _extract_key_phrases(self, doc) -> list:
         """Extract important phrases using noun chunks."""
-        return [chunk.text for chunk in doc.noun_chunks][:5]  # Get top 5 phrases
+        return [chunk.text for chunk in doc.noun_chunks][:10]  # Get top 5 phrases

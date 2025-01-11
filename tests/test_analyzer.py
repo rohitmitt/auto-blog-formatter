@@ -1,5 +1,5 @@
 import pytest
-from blog_formatter.analyzer import TextAnalyzer
+from src.blog_formatter.analyzer import TextAnalyzer
 
 @pytest.fixture
 def analyzer():
@@ -38,6 +38,9 @@ def test_metadata_structure(analyzer, sample_text):
     assert 'sentiment' in result['metadata']
     assert 'key_phrases' in result['metadata']
     assert isinstance(result['metadata']['key_phrases'], list)
+    print("\nMetadata Analysis Results:")
+    print(f"Sentiment: {result['metadata']['sentiment']}")
+    print(f"Key Phrases: {', '.join(result['metadata']['key_phrases'])}")
 
 def test_empty_text(analyzer):
     result = analyzer.analyze_text("")
