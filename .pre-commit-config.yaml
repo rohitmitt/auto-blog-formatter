@@ -9,10 +9,10 @@ repos:
     rev: 0.5.18
     hooks:
       - id: uv-lock
-      - id: uv-export
-        args: ["--frozen"]
+        files: ^requirements\.(in|txt)$
+        args: [--lockfile=requirements.lock]
       - id: uv-sync
-        args: ["--locked"]
+        args: [--lockfile=requirements.lock]
   - repo: local
     hooks:
       - id: check-requirements

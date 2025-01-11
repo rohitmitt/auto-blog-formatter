@@ -4,7 +4,9 @@ A tool to automatically format blog posts according to specified rules.
 
 ## Installation
 
-### Install UV (Recommended)
+### Prerequisites
+
+**Install UV (Recommended)**
 First, install UV for faster dependency management:
 
 ```bash
@@ -14,6 +16,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 # On macOS and Linux.
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
+
 
 ### Install Dependencies
 
@@ -40,9 +43,27 @@ The project uses pre-commit hooks to automatically install new dependencies:
 uv pip install pre-commit
 
 # Set up the git hooks
-pre-commit install
+pre-commit install --install-hooks -t pre-commit -t post-checkout -t post-merge -t post-rewrite
 
 # Now any changes to requirements.txt will trigger automatic installation
+```
+
+### Managing Dependencies
+1. Add new dependencies to `requirements.in`:
+```bash
+# Example: Add new package
+echo "requests" >> requirements.in
+```
+
+2. The pre-commit hooks will automatically:
+   - Generate/update the lockfile
+   - Sync your environment with the locked dependencies
+   - Keep requirements.txt updated
+
+You can also manually update dependencies:
+```bash
+uv pip compile requirements.in -o requirements.txt
+uv pip sync requirements.txt
 ```
 
 ## Usage
