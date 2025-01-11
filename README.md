@@ -12,7 +12,8 @@ First, install UV for faster dependency management:
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 # On macOS and Linux.
-curl -LsSf https://astral.sh/uv/install.sh | sh```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
 
 ### Install Dependencies
 

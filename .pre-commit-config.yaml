@@ -1,9 +1,15 @@
+default_install_hook_types:
+  - pre-commit
+  - post-checkout
+  - post-merge
+  - post-rewrite
+
 repos:
--   repo: local
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.18
     hooks:
-    -   id: check-requirements
-        name: Check and Install Requirements
-        entry: python scripts/update_dependencies.py
-        language: python
-        files: requirements.txt
-        pass_filenames: false
+      - id: uv-lock
+      - id: uv-export
+        args: ["--frozen"]
+      - id: uv-sync
+        args: ["--locked"]
