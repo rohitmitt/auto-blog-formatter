@@ -1,0 +1,56 @@
+[project]
+name = "blog-site-autoformatter"
+version = "0.1.0"
+description = "A tool to automatically format blog posts according to specified rules."
+authors = [{name = "Rohit", email = "mittalrohit@proton.me"}]
+readme = {file = "README.txt", content-type = "text/markdown"}
+
+dependencies = [
+    "annotated-types==0.7.0",
+    "argparse==1.4.0",
+    "blis==0.7.11",
+    "catalogue==2.0.10",
+    "certifi==2024.12.14",
+    "cfgv==3.4.0",
+    "charset-normalizer==3.4.1",
+    "click==8.1.8",
+    "cloudpathlib==0.16.0",
+    "colorama==0.4.6",
+    "confection==0.1.5",
+    "cymem==2.0.10",
+    "distlib==0.3.9",
+    "en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.0/en_core_web_sm-3.7.0-py3-none-any.whl",
+    "filelock==3.16.1",
+    "identify==2.6.5",
+    "idna==3.10",
+    "jinja2==3.1.5",
+    "langcodes==3.5.0",
+    "language-data==1.3.0",
+    "marisa-trie==1.2.1",
+    "markupsafe==3.0.2",
+    "murmurhash==1.0.11",
+    "nodeenv==1.9.1",
+    "numpy==1.26.4",
+    "packaging==24.2",
+    "platformdirs==4.3.6",
+    "pre-commit==4.0.1",
+    "preshed==3.0.9",
+    "pydantic==2.10.5",
+    "pydantic-core==2.27.2",
+    "pyyaml==6.0.2",
+    "requests==2.32.3",
+    "setuptools==75.8.0",
+    "smart-open==6.4.0",
+    "spacy==3.7.2",
+    "spacy-legacy==3.0.12",
+    "spacy-loggers==1.0.5",
+    "srsly==2.5.0",
+    "thinc==8.2.5",
+    "tqdm==4.67.1",
+    "typer==0.9.4",
+    "typing-extensions==4.12.2",
+    "urllib3==2.3.0",
+    "virtualenv==20.28.1",
+    "wasabi==1.1.3",
+    "weasel==0.3.4"
+]

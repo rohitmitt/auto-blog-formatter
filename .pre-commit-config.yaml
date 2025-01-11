@@ -4,20 +4,33 @@ default_install_hook_types:
   - post-merge
   - post-rewrite
 
+
+default_install_hook_types:
+  - pre-commit
+  - post-checkout
+  - post-merge
+  - post-rewrite
+
 repos:
+  # 1. Lock the dependencies
   - repo: https://github.com/astral-sh/uv-pre-commit
     rev: 0.5.18
     hooks:
       - id: uv-lock
+        name: Lock Dependencies
         files: ^requirements\.(in|txt)$
-        args: [--lockfile=requirements.lock]
-      - id: uv-sync
-        args: [--lockfile=requirements.lock]
-  - repo: local
+
+  # 2. Export the lock file to requirements.txt
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.18
     hooks:
-      - id: check-requirements
-        name: Check and Install Requirements
-        entry: python scripts/update_dependencies.py
-        language: python
-        files: requirements.txt
-        pass_filenames: false
+      - id: uv-export
+        name: Export Lock to requirements.txt
+
+  # 3. Compile requirements.in to requirements.txt
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.5.18
+    hooks:
+      - id: pip-compile
+        name: Compile requirements.in to requirements.txt
+        args: [requirements.in, -o, requirements.txt]
