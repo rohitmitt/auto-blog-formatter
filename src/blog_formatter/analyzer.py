@@ -34,9 +34,21 @@ class TextAnalyzer:
                 subtitle_found = True
                 break
                 
-        # Rest is considered body
+        # Process body paragraphs
         start_idx = 2 if subtitle_found else 1
-        structure['body'] = [line.strip() for line in lines[start_idx:] if line.strip()]
+        current_paragraph = []
+        
+        for line in lines[start_idx:]:
+            if not line.strip():  # Empty line indicates paragraph break
+                if current_paragraph:
+                    structure['body'].append(' '.join(current_paragraph))
+                    current_paragraph = []
+            else:
+                current_paragraph.append(line.strip())
+        
+        # Append last paragraph if exists
+        if current_paragraph:
+            structure['body'].append(' '.join(current_paragraph))
         
         # Analyze sentiment and key phrases
         structure['metadata']['sentiment'] = self._analyze_sentiment(doc)

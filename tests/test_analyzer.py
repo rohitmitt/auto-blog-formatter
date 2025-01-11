@@ -1,5 +1,5 @@
 import pytest
-from analyzer import TextAnalyzer
+from blog_formatter.analyzer import TextAnalyzer
 
 @pytest.fixture
 def analyzer():
@@ -30,7 +30,7 @@ def test_title_extraction(analyzer, sample_text):
 
 def test_body_extraction(analyzer, sample_text):
     result = analyzer.analyze_text(sample_text)
-    assert len(result['body']) == 3
+    assert len(result['body']) == 2
     assert "AI is rapidly evolving" in result['body'][0]
 
 def test_metadata_structure(analyzer, sample_text):
