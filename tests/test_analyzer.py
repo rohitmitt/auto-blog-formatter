@@ -1,4 +1,5 @@
 import pytest
+import os
 from analyzer import TextAnalyzer
 
 @pytest.fixture
