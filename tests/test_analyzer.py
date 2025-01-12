@@ -1,6 +1,9 @@
 import pytest
 from src.blog_formatter.analyzer import TextAnalyzer
 
+# TO RUN USE COMMAND 
+# pytest tests/test_analyzer.py -v -s 
+
 @pytest.fixture
 def analyzer():
     return TextAnalyzer()
@@ -23,6 +26,7 @@ def test_basic_structure(analyzer, sample_text):
     assert 'body' in result
     assert 'metadata' in result
 
+
 def test_title_extraction(analyzer, sample_text):
     result = analyzer.analyze_text(sample_text)
     assert result['title'] == "The Future of Artificial Intelligence"
@@ -38,12 +42,25 @@ def test_metadata_structure(analyzer, sample_text):
     assert 'sentiment' in result['metadata']
     assert 'key_phrases' in result['metadata']
     assert isinstance(result['metadata']['key_phrases'], list)
-    print("\nMetadata Analysis Results:")
-    print(f"Sentiment: {result['metadata']['sentiment']}")
-    print(f"Key Phrases: {', '.join(result['metadata']['key_phrases'])}")
 
 def test_empty_text(analyzer):
     result = analyzer.analyze_text("")
     assert result['title'] == ""
     assert result['subtitle'] == ""
     assert len(result['body']) == 0
+
+def test_print_full_structure(analyzer, sample_text):
+    """Print the complete structure of the analyzer output."""
+    result = analyzer.analyze_text(sample_text)
+    json = analyzer.to_json(result)
+    print("JSON", json)
+    print("RESULT", result)
+    print("\nComplete Analysis Result:")
+    print(f"Title: {result['title']!r}")
+    print(f"Subtitle: {result['subtitle']!r}")
+    print("\nBody paragraphs:")
+    for i, para in enumerate(result['body'], 1):
+        print(f"{i}. {para!r}")
+    print("\nMetadata:")
+    print(f"Sentiment: {result['metadata']['sentiment']}")
+    print(f"Key phrases: {result['metadata']['key_phrases']}")
